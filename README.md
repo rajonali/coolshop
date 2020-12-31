@@ -98,3 +98,8 @@ Create a product on [CommerceJS dashboard](https://dashboard.chec.io/products).
    3. Create a product
    4. Enter image, name, price, shipping, ...
    5. Create 2 more products
+4. List Products
+   1. Create utils/commerce.js
+   2. Edit pages/index.js
+   3. commerce.products.list()
+   4. Show products in divs
