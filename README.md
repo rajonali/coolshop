@@ -1,34 +1,100 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Coolshop
+  An ECommerce website powered by CommerceJS and NextJS
+ 
+## Run Locally
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
+### 1. Fork and Clone repo
+- Open http://github.com/basir/coolshop-final.git
+- Fork repo
+- Open terminal
+```
+$ git clone git@github.com:basir/coolshop-final.git
+$ cd coolshop-final
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Get CommerceJS keys
+Create account on [CommerceJS](http://commercejs.com/) website and get your api keys.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 3. Create .env file
+```
+COMMERCE_PUBLIC_KEY_LIVE=pk_xxx
+COMMERCE_SECRET_KEY_LIVE=sk_xxx
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### 4. Install NPM Packages
+```
+$ npm install
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### 5. Run Application
+```
+$ npm run dev
+```
 
-## Learn More
+### 6. Open ecommerce website
+Open [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+## Use Ecommerce Website
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Create product
+Create a product on [CommerceJS dashboard](https://dashboard.chec.io/products).
+ - Set SHIPPING OPTIONS to enabled
+ - Set Domestic (United States) to enabled
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 2. Place an order
+- open website on http://localhost:3000
+- select one product
+- add to cart
+- proceed to checkout
+- confirm order
+  
+### 3. Check order
+- open admin dashboard on https://dashboard.chec.io/orders
+- find the last order
+- check email to see the order
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 1. Create Vercel account
+- open [https://vercel.com](https://vercel.com)
+- sign up and login to your account
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### 2. Import github repo to vercel
+- Open https://vercel.com/dashboard
+- Click Import Project
+- Click Import Git Repository
+- Enter forked repo for coolshop on your github
+- give permission in github to vercel
+
+### 3. Enter env variable for CommerceJS
+- Enter name:COMMERCE_PUBLIC_KEY_LIVE
+- Enter value: your public key on Commercejs
+
+### 4. Deploy
+- click deploy button
+- wait to complete deployment
+- click Visit Site at the end
+
+## Lessons
+1. Introduction
+   1. What we will build
+   2. What we will learn
+   3. What are requirements
+   4. What is CommerceJS
+   5. What is NextJS
+   6. Conclusion
+2. Create NextJS App and Deploy on Vercel
+   1. run npx create-next-app
+   2. answer questions
+   3. create github repo
+   4. push to github
+   5. create vercel account
+   6. connect to vercel
+   7. deploy on vercel
+3. Create Products On CommerceJS
+   1. Create CommerceJS account
+   2. Create a merchant
+   3. Create a product
+   4. Enter image, name, price, shipping, ...
+   5. Create 2 more products
