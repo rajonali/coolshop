@@ -103,3 +103,7 @@ Create a product on [CommerceJS dashboard](https://dashboard.chec.io/products).
    2. Edit pages/index.js
    3. commerce.products.list()
    4. Show products in divs
+5. Create React Context
+   1. Create Store.js
+   2. Create _app.js
+   3. set publicKey in page props
