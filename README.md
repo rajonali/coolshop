@@ -107,3 +107,7 @@ Create a product on [CommerceJS dashboard](https://dashboard.chec.io/products).
    1. Create Store.js
    2. Create _app.js
    3. set publicKey in page props
+6. Design MaterialUI Layout
+   1. Install MaterialUI packages
+   2. Create _document.js
+   3. Create Layout.js
