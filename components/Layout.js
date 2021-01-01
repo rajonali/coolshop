@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   ThemeProvider,
   CssBaseline,
@@ -8,10 +8,18 @@ import {
   Container,
   Box,
   Typography,
+  CircularProgress,
+  Badge,
 } from '@material-ui/core';
 import { theme, useStyles } from '../utils/styles';
 import Head from 'next/head';
 import NextLink from 'next/link';
+import {
+  CART_RETRIEVE_REQUEST,
+  CART_RETRIEVE_SUCCESS,
+} from '../utils/constants';
+import { Store } from './Store';
+import getCommerce from '../utils/commerce';
 
 export default function Layout({
   children,
@@ -19,6 +27,18 @@ export default function Layout({
   title = 'Coolshop',
 }) {
   const classes = useStyles();
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const commerce = getCommerce(commercePublicKey);
+      dispatch({ type: CART_RETRIEVE_REQUEST });
+      const cartData = await commerce.cart.retrieve();
+      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData });
+    };
+    fetchCart();
+  }, []);
 
   return (
     <React.Fragment>
@@ -59,7 +79,15 @@ export default function Layout({
                   href="/cart"
                   className={classes.link}
                 >
-                  Cart
+                  {cart.loading ? (
+                    <CircularProgress />
+                  ) : cart.data.total_items > 0 ? (
+                    <Badge badgeContent={cart.data.total_items} color="primary">
+                      Cart
+                    </Badge>
+                  ) : (
+                    'Cart'
+                  )}
                 </Link>
               </NextLink>
             </nav>

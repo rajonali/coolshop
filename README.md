@@ -118,3 +118,10 @@ Create a product on [CommerceJS dashboard](https://dashboard.chec.io/products).
 8. Create Product Details Screen
    1. create products/[id].js
    2. create 2 columns
+9. Implement Add To Cart action
+   1. check cart line items
+   2. add or update item in the cart
+   3. redirect to /cart
+   4. Show Cart Menu on Header
+   5. Create CART_RETRIEVE actions
+   6. show cart items in header
