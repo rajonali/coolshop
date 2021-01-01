@@ -111,3 +111,7 @@ Create a product on [CommerceJS dashboard](https://dashboard.chec.io/products).
    1. Install MaterialUI packages
    2. Create _document.js
    3. Create Layout.js
+7. Style Product List Screen
+   1. Use Layout
+   2. Show alert on no product found
+   3. Create Grid, Slide, ...
