@@ -131,3 +131,14 @@ Create a product on [CommerceJS dashboard](https://dashboard.chec.io/products).
     3. update cart item
     4. remove cart item
     5. proceed to checkout
+11. Create Checkout Screen
+    1.  Create checkout form and order summary columns
+    2.  create steppers to make a wizard
+    3.  add customer details inputs
+    4.  add Shipping details inputs
+    5.  add Payment information inputs
+12. Implement Checkout Actions
+    1.  Create order
+    2.  Show error on creating order
+    3.  Set order in Context
+    4.  redirect user to confirmation screen on success
