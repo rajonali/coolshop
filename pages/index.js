@@ -12,6 +12,7 @@ import {
 import { Alert } from '@material-ui/lab';
 import Layout from '../components/Layout';
 import getCommerce from '../utils/commerce';
+import { getSession } from "next-auth/react"
 
 export default function Home(props) {
   const { products } = props;
@@ -62,12 +63,15 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(ctx) {
   const commerce = getCommerce();
   const { data: products } = await commerce.products.list();
   return {
     props: {
       products,
+      session: await getSession(ctx)
+
     },
   };
 }
+

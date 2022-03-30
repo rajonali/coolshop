@@ -4,10 +4,25 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import Router from 'next/router';
 import { useEffect } from 'react';
+import { getSession, SessionProvider} from "next-auth/react"
+
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
+
+const { data: session } = getSession()
+
+MyApp.getInitialProps = async () => {
+
+  return {
+    pageProps: {
+      session,
+      commercePublicKey: process.env.COMMERCE_PUBLIC_KEY,
+    },
+  };
+};
+
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -19,18 +34,12 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
+    <SessionProvider session={session}>
     <StoreProvider>
       <Component {...pageProps} />
     </StoreProvider>
+    </SessionProvider>
   );
 }
 
 export default MyApp;
-
-MyApp.getInitialProps = async () => {
-  return {
-    pageProps: {
-      commercePublicKey: process.env.COMMERCE_PUBLIC_KEY,
-    },
-  };
-};

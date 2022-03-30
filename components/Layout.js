@@ -21,6 +21,12 @@ import {
 import { Store } from './Store';
 import getCommerce from '../utils/commerce';
 
+
+
+//auth
+import { useSession, signIn, signOut } from "next-auth/react"
+
+
 export default function Layout({
   children,
   commercePublicKey,
@@ -29,9 +35,14 @@ export default function Layout({
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
+  const { data: session } = useSession()
+
+
 
   useEffect(() => {
+    
     const fetchCart = async () => {
+      
       const commerce = getCommerce(commercePublicKey);
       dispatch({ type: CART_RETRIEVE_REQUEST });
       const cartData = await commerce.cart.retrieve();
@@ -68,9 +79,18 @@ export default function Layout({
                 href="/"
                 className={classes.toolbarTitle}
               >
-                Coolshop
+                Express Mobile Solutions
               </Link>
             </NextLink>
+            <p>
+              {session ? <>
+        Signed in as {session.user.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </> :  <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>}
+            </p>
             <nav>
               <NextLink href="/cart">
                 <Link
@@ -100,7 +120,7 @@ export default function Layout({
           <Box mt={5}>
             <Typography variant="body2" color="textSecondary" align="center">
               {'© '}
-              Coolshop 2021
+              Express Mobile Solutions 2022
               {'.'}
             </Typography>
           </Box>
