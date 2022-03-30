@@ -15,6 +15,8 @@ import getCommerce from '../utils/commerce';
 
 export default function Home(props) {
   const { products } = props;
+
+  console.log (products);
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
       {products.length === 0 && <Alert>No product found</Alert>}
@@ -28,7 +30,7 @@ export default function Home(props) {
                     <CardMedia
                       component="img"
                       alt={product.name}
-                      image={product.media.source}
+                      image={product.assets[0].url}
                     />
                     <CardContent>
                       <Typography

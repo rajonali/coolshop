@@ -53,7 +53,7 @@ export default function Product(props) {
         <Grid container spacing={1}>
           <Grid item md={6}>
             <img
-              src={product.media.source}
+              src={product.assets[0].url}
               alt={product.name}
               className={classes.largeImage}
             />
@@ -96,7 +96,7 @@ export default function Product(props) {
                       Status
                     </Grid>
                     <Grid item xs={6}>
-                      {product.quantity > 0 ? (
+                      {product.inventory.available > 0 ? (
                         <Alert icon={false} severity="success">
                           In Stock
                         </Alert>
@@ -108,7 +108,7 @@ export default function Product(props) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {product.quantity > 0 && (
+                {product.inventory.available > 0 && (
                   <>
                     <ListItem>
                       <Grid container justify="flex-end">
@@ -123,7 +123,7 @@ export default function Product(props) {
                             onChange={(e) => setQuantity(e.target.value)}
                             value={quantity}
                           >
-                            {[...Array(product.quantity).keys()].map((x) => (
+                            {[...Array(product.inventory.available).keys()].map((x) => (
                               <MenuItem key={x + 1} value={x + 1}>
                                 {x + 1}
                               </MenuItem>
