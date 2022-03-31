@@ -27,12 +27,12 @@ import {
 } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import { Alert } from '@material-ui/lab';
-import Layout from '../components/Layout';
-import getCommerce from '../utils/commerce';
-import { useStyles } from '../utils/styles';
+import Layout from '../../components/Layout';
+import getCommerce from '../../utils/commerce';
+import { useStyles } from '../../utils/styles';
 import { useContext } from 'react';
-import { Store } from '../components/Store';
-import { CART_RETRIEVE_SUCCESS, ORDER_SET } from '../utils/constants';
+import { Store } from '../../components/Store';
+import { CART_RETRIEVE_SUCCESS, ORDER_SET } from '../../utils/constants';
 import Router from 'next/router';
 
 const dev = process.env.NODE_ENV === 'development';
@@ -145,8 +145,14 @@ function Checkout(props) {
       );
       dispatch({ type: ORDER_SET, payload: order });
       localStorage.setItem('order_receipt', JSON.stringify(order));
+/** 
+      if (authenticated){
+        db.userid.append(order)
+      }
+*/
+
       await refreshCart();
-      Router.push('/confirmation');
+      Router.push('/checkout/confirmation');
     } catch (err) {
       const errList = [err.data.error.message];
       const errs = err.data.error.errors;

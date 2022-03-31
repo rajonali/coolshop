@@ -20,12 +20,12 @@ import {
 } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import { Alert } from '@material-ui/lab';
-import Layout from '../components/Layout';
-import getCommerce from '../utils/commerce';
-import { useStyles } from '../utils/styles';
+import Layout from '../../components/Layout';
+import getCommerce from '../../utils/commerce';
+import { useStyles } from '../../utils/styles';
 import { useContext } from 'react';
-import { Store } from '../components/Store';
-import { CART_RETRIEVE_SUCCESS } from '../utils/constants';
+import { Store } from '../../components/Store';
+import { CART_RETRIEVE_SUCCESS } from '../../utils/constants';
 import Router from 'next/router';
 
 function Confirmation(props) {

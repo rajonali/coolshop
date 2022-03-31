@@ -47,6 +47,7 @@ function Cart(props) {
   };
 
   const proccessToCheckoutHandler = () => {
+    
     Router.push('/checkout');
   };
 

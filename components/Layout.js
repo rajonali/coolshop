@@ -27,15 +27,16 @@ import getCommerce from '../utils/commerce';
 import { useSession, signIn, signOut } from "next-auth/react"
 
 
+
 export default function Layout({
   children,
   commercePublicKey,
-  title = 'Coolshop',
+  title = 'EMS',
 }) {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
 
 
 
@@ -47,6 +48,15 @@ export default function Layout({
       dispatch({ type: CART_RETRIEVE_REQUEST });
       const cartData = await commerce.cart.retrieve();
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData });
+      
+/** 
+      if (user) {
+        connect to db 
+        lookup cust_id and set cart field to cartData
+      }
+
+      */
+
     };
     fetchCart();
   }, []);
