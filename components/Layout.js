@@ -26,7 +26,7 @@ import getCommerce from '../utils/commerce';
 //auth
 import { useSession, signIn, signOut } from "next-auth/react"
 
-
+import prisma from '@prisma/client'
 
 export default function Layout({
   children,
@@ -41,7 +41,7 @@ export default function Layout({
 
 
   useEffect(() => {
-    
+
     const fetchCart = async () => {
       
       const commerce = getCommerce(commercePublicKey);
@@ -49,6 +49,9 @@ export default function Layout({
       const cartData = await commerce.cart.retrieve();
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData });
       
+      
+      
+
 /** 
       if (user) {
         connect to db 
@@ -59,6 +62,7 @@ export default function Layout({
 
     };
     fetchCart();
+    
   }, []);
 
   return (
