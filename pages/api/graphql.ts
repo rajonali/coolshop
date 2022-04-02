@@ -1,6 +1,7 @@
 import {ApolloServer, gql} from 'apollo-server-micro';
 import {PrismaClient} from '@prisma/client';
 import Cors from 'micro-cors';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const prisma = new PrismaClient()
@@ -9,20 +10,36 @@ const cors = Cors();
 
 const typeDefs = gql`
     type Card {
-        id: Int!,
+        id: String!,
         name: String!,
         email: String!,
         phone: String!,
-        biography: String!,
-        cardId: String!,
+        bio: String!,
         twitter: String!,
         github: String!,
-        website: String! 
+        website: String!, 
         }
 
+        input CardInput {
+            name: String!,
+            email: String!, 
+            phone: String!,
+            bio: String!,
+            twitter: String!,
+            github: String!,
+            website: String!,
+        } 
         
         type Query {
             getCards: [Card]
+            getCard(id: String!): Card 
+            }
+
+
+        type Mutation {
+            addCard( input: CardInput!): Card
+            deleteCard(id: String!): Card
+
     }
 
 
@@ -31,11 +48,38 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         getCards: async () => {
-            const card = await prisma.card.findMany({
-                take: 10,   
+            const cards = await prisma.card.findMany({
+                take: 2, 
             })
+            return cards  
+
         },
+
+        getCard: async (_, args) => {
+            return prisma.card.findUnique({
+                where: {
+                    id: args.id
+                }
+            }
+            )
+        },
+
     },
+
+    Mutation : {
+        addCard: async (_, args) => {
+            return prisma.card.create({
+                data: {...args.input, id: uuidv4()},
+            }) 
+        },
+        deleteCard: async (_, args) => {
+            return prisma.card.delete({
+                where: {
+                    id: args.id,
+                }
+            })
+        }
+    }
 };
 
 export const config = {
@@ -68,6 +112,7 @@ export default async function handler(req, res)  {
     }
   
     await startServer;
+    
     await apolloServer.createHandler({
       path: "/api/graphql",
     })(req, res);

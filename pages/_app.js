@@ -6,6 +6,9 @@ import Router from 'next/router';
 import { useEffect } from 'react';
 import { getSession, SessionProvider} from "next-auth/react"
 
+import { SnackbarProvider } from 'notistack';
+
+
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -35,9 +38,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <SessionProvider session={session}>
+          <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+
     <StoreProvider>
       <Component {...pageProps} />
     </StoreProvider>
+    </SnackbarProvider>
     </SessionProvider>
   );
 }

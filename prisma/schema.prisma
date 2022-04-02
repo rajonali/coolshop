@@ -56,7 +56,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   cart          String?
-  Profile       Profile[]
+  Profile       Card[]
 }
 
 model VerificationToken {
@@ -67,16 +67,15 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Profile { 
-  id        String  @id @default(cuid())
-  name      String
-  email     String  @unique
-  bio       String
-  slug      String  @unique
-  phone     String?
-  twitter   String?
-  instagram String?
-  facebook  String?
-  userId    String
-  user      User    @relation(fields: [userId], references: [id])
+model Card {
+  id  String  @id @default(cuid())
+  name    String
+  email   String  @unique
+  bio     String?
+  phone   String?
+  twitter String?
+  website String?
+  github  String?
+  userId  String?
+  User User? @relation(fields: [userId], references: [id])
 }

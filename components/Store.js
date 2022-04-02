@@ -5,6 +5,9 @@ import {
   ORDER_SET,
 } from '../utils/constants';
 
+
+
+
 export const Store = createContext();
 
 function reducer(state, action) {
@@ -24,12 +27,71 @@ function reducer(state, action) {
         ...state,
         order: action.payload,
       };
+      case 'SAVE_SHIPPING_ADDRESS':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: {
+            ...state.cart.shippingAddress,
+            ...action.payload,
+          },
+        },
+      };
+      case 'SAVE_PAYMENT_METHOD':
+        return {
+          ...state,
+          cart: { ...state.cart, paymentMethod: action.payload },
+        };
+      case 'USER_LOGIN':
+        return { ...state, userInfo: action.payload };
+    case 'USER_LOGOUT':
+      return {
+        ...state,
+        userInfo: null,
+        cart: {
+          cartItems: [],
+          shippingAddress: { location: {} },
+          paymentMethod: '',
+        },
+      };
+
     default:
       return state;
   }
 }
+
+
+//fetch user info and store into init state
+
+async function fetchDick(){
+
+  const profile = await prisma.user.findMany({
+    where: { id: "cl1efyj2o00088gtebj2lc4v6" },
+    select: {
+      email: true,
+      name: true,
+    },
+
+  });
+  return profile
+
+}
+
+
+
+
 const initialState = {
-  cart: { loading: true },
+  cart: { loading: true,
+    cartItems: [],
+  shippingAddress: { location: {} },
+  paymentMethod: '',
+  userInfo: null,
+
+
+  
+  
+  },
   order:
     typeof window !== 'undefined' &&
     window.localStorage.getItem('order_receipt')

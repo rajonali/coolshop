@@ -84,7 +84,7 @@ export default function Layout({
           elevation={0}
           className={classes.appBar}
         >
-          <Toolbar className={classes.toolbar}>
+          <Toolbar style={{display:'flex', flex:1, justifyContent:'space-evenly', alignItems:'center'}}>
             <NextLink href="/">
               <Link
                 variant="h6"
@@ -95,7 +95,20 @@ export default function Layout({
               >
                 Express Mobile Solutions
               </Link>
+              
             </NextLink>
+            <NextLink href="/products">
+            <Link href="/products">
+              Products
+              </Link>
+            </NextLink>
+            
+            <NextLink href="/account">
+            <Link href="/account">
+              My Account
+              </Link>
+            </NextLink>
+            <div>
             <p>
               {session ? <>
         Signed in as {session.user.email} <br />
@@ -105,6 +118,7 @@ export default function Layout({
       <button onClick={() => signIn()}>Sign in</button>
     </>}
             </p>
+            </div>
             <nav>
               <NextLink href="/cart">
                 <Link

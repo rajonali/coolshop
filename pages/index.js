@@ -14,57 +14,36 @@ import Layout from '../components/Layout';
 import getCommerce from '../utils/commerce';
 import { getSession } from "next-auth/react"
 
+import { PrismaClient } from "@prisma/client";
+
+
+
 export default function Home(props) {
   const { products } = props;
 
   console.log (products);
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
-      {products.length === 0 && <Alert>No product found</Alert>}
-      <Grid container spacing={1}>
-        {products.map((product) => (
-          <Grid key={product.id} item md={3}>
-            <Slide direction="up" in={true}>
-              <Card>
-                <Link href={`/products/${product.permalink}`}>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      alt={product.name}
-                      image={product.assets[0].url}
-                    />
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="body2"
-                        color="textPrimary"
-                        component="p"
-                      >
-                        {product.name}
-                      </Typography>
-                      <Box>
-                        <Typography
-                          variant="body1"
-                          color="textPrimary"
-                          component="p"
-                        >
-                          {product.price.formatted_with_symbol}
-                        </Typography>
-                      </Box>
-                    </CardContent>
-                  </CardActionArea>
-                </Link>
-              </Card>
-            </Slide>
-          </Grid>
-        ))}
-      </Grid>
-    </Layout>
+<p>Velcome</p>   
+ </Layout>
   );
 }
 
 export async function getStaticProps(ctx) {
   const commerce = getCommerce();
+  const prisma = new PrismaClient();
+  console.log("dsa");
+
+  const profile = await prisma.card.findUnique({
+    where: { email: "dlaskjL@kdlajskl.com" }
+  });
+
+
+  const session = await getSession(ctx);
+
+
+
+
   const { data: products } = await commerce.products.list();
   return {
     props: {
